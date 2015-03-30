@@ -9,29 +9,29 @@ import java.awt.geom.*;
  *
  * This movement can be initiated by repeated calls to the "move" method.
  * 
- * @author Robert Foder
+ * @ author Robert Foder
  *
  * @version 3/23/15
  */
 
-public class BouncingBall
+public class BoxBall
 {
     private static final int GRAVITY = 3;  // effect of gravity
 
-    private int ballDegradation = 2;
+    //private int ballDegradation = 2;
     private Ellipse2D.Double circle;
     private Color color;
     private int diameter;
     private int xPosition;
     private int yPosition;
-    private final int groundPosition;
-    //private final int bottomwall;      // y position of ground
-    //private final int topwall;
-    //private final int leftwall;
-    //private final int rightwall;   
+    //private final int groundPosition;
+    private final int bottomwall;      // y position of ground
+    private final int topwall;
+    private final int leftwall;
+    private final int rightwall;   
     private Canvas canvas;
-    private int ySpeed = 1;                // initial downward speed
-    //private int xSpeed = 7;
+    private int ySpeed = 4;                // initial downward speed
+    private int xSpeed = 7;
 
     /**
      * Constructor for objects of class BouncingBall
@@ -43,19 +43,19 @@ public class BouncingBall
      * @param groundPos  the position of the ground (where the wall will bounce)
      * @param drawingCanvas  the canvas to draw this ball on
      */
-    public BouncingBall(int xPos, int yPos, int ballDiameter, Color ballColor,
-                         int groundPos, Canvas drawingCanvas)
+    public BoxBall(int xPos, int yPos, int ballDiameter, Color ballColor,
+                          Canvas drawingCanvas)
     {
         xPosition = xPos;
         yPosition = yPos;
         color = ballColor;
         diameter = ballDiameter;
-        groundPosition = groundPos;
+        //groundPosition = groundPos;
         canvas = drawingCanvas;
-        //leftwall = 0;
-        //rightwall = 600;
-        //topwall = 0;
-        //bottomwall = 500;
+        leftwall = 0;
+        rightwall = 600;
+        topwall = 0;
+        bottomwall = 500;
     }
 
     /**
@@ -81,31 +81,30 @@ public class BouncingBall
     public void move()
     {
         // remove from canvas at the current position
-        //erase();
+        erase();
             
         // compute new position
-        ySpeed += GRAVITY;
+        //ySpeed += GRAVITY;
         yPosition += ySpeed;
-        xPosition +=4; 
-       // xPosition += xSpeed;
+        xPosition += xSpeed;
 
         // check if it has hit the ground
-        if(yPosition >= (groundPosition - diameter) && ySpeed > 0) {
-             yPosition = (int)(groundPosition - diameter);
-             ySpeed = -ySpeed + ballDegradation; 
-         }
-//         if (xPosition < leftwall){
-//                 xSpeed = -xSpeed;
-//             }
-//         if (xPosition > rightwall){
-//                 xSpeed = -xSpeed;
-//             }
-//         if (yPosition < topwall){
-//                 ySpeed = -ySpeed;
-//             }
-//         if (yPosition > bottomwall){
-//                 ySpeed = -ySpeed;
-//             }
+//         if(yPosition >= (groundPosition - diameter) && ySpeed > 0) {
+//              yPosition = (int)(groundPosition - diameter);
+//              ySpeed = -ySpeed + ballDegradation; 
+//       }
+        if (xPosition < leftwall){
+                xSpeed = -xSpeed;
+            }
+        if (xPosition > rightwall){
+                xSpeed = -xSpeed;
+            }
+            if (yPosition < topwall){
+                ySpeed = -ySpeed;
+            }
+        if (yPosition > bottomwall){
+                ySpeed = -ySpeed;
+            }
         // draw again at new position
         draw();
     }    

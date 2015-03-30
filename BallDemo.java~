@@ -36,7 +36,7 @@ public class BallDemo
      ball7.draw();
      BoxBall ball8 = new BoxBall(340,175,14, Color.GREEN, myCanvas);
      ball8.draw();
-     BoxBall ball9 = new BoxBall(330,200,16, Color.YELLOW, myCanvas);
+     BoxBall ball9 = new BoxBall(3330,200,16, Color.YELLOW, myCanvas);
      ball9.draw();
         while(true) {
             myCanvas.wait(50);
